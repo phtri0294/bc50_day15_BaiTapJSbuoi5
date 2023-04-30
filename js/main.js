@@ -1,104 +1,192 @@
-// ------------------------------------------
-// CHƯƠNG TRÌNH 
-btnXepHang.onclick = function () {
+function getEle(id) {
+    return document.getElementById(id);
+};
+
+function formatMoney(number) {
+    return new Intl.NumberFormat('vn-VN').format(number);
+}
+
+// <!-- ===================================================-->
+// <!-- BÀI TẬP 1: QUẢN LÝ TUYỂN SINH -->
+getEle('btnKetQuaDiem').onclick = function () {
     // INPUT
-    var diemToan = document.getElementById('diemToan').value * 1;
-    var diemLy = document.getElementById('diemLy').value * 1;
-    var diemHoa = document.getElementById('diemHoa').value * 1;
+    var diemChuan = getEle('diemChuan').value * 1;
+    var diemMonThu1 = getEle('diemMonThu1').value * 1;
+    var diemMonThu2 = getEle('diemMonThu2').value * 1;
+    var diemMonThu3 = getEle('diemMonThu3').value * 1;
+    var chonKhuVuc = getEle('chonKhuVuc').value * 1;
+    var chonDoiTuong = getEle('chonDoiTuong').value * 1;
 
     // OUTPUT
-    var diemTrungBinh = '';
-    var xepHang = '';
+    var ketQuaDiem = '';
+
+    var ketQua = '';
 
     // PROGRESS
-    diemTrungBinh = (diemToan + diemLy + diemHoa) / 3;
+    ketQuaDiem = (diemMonThu1 + diemMonThu2 + diemMonThu3) + (chonKhuVuc + chonDoiTuong);
 
-    // HIỂN THỊ
-    if (diemTrungBinh >= 8.5) {
-        document.getElementById('xepHang').innerHTML = 'Loại giỏi: ' + diemTrungBinh;
+    // KẾT QUẢ HIỂN THỊ
+    if (diemMonThu1 === 0 || diemMonThu2 === 0 || diemMonThu3 === 0) {
+        ketQua = 'Bạn thi rớt do có 1 môn bị điểm liệt (0 điểm)';
     }
-    else if (6.5 <= diemTrungBinh && diemTrungBinh < 8.5) {
-        document.getElementById('xepHang').innerHTML = 'Loại khá: ' + diemTrungBinh;
-    }
-    else if (5 <= diemTrungBinh && diemTrungBinh < 6.5) {
-        document.getElementById('xepHang').innerHTML = 'Loại trung bình: ' + diemTrungBinh;
+    else if (ketQuaDiem < diemChuan) {
+        ketQua = 'Bạn thi rớt do điểm bé hơn điểm chuẩn: ' + ketQuaDiem + ' điểm';
     }
     else {
-        document.getElementById('xepHang').innerHTML = 'Loại yếu: ' + diemTrungBinh;
+        ketQua = 'Chúc mừng bạn thi đậu: ' + ketQuaDiem + ' điểm';
+    }
+
+    getEle('ketQuaDiem').innerHTML = ketQua;
+};
+
+// <!-- ===================================================-->
+// <!-- BÀI TẬP 2: TÍNH TIỀN ĐIỆN -->
+getEle('btnTinhTienDien').onclick = function () {
+    // INPUT
+    var nhapHoTen = getEle('nhapHoTen').value;
+    var nhapSoKw = parseFloat(getEle('nhapSoKw').value);
+
+    const cost_0to50 = 500;
+    const cost_50to100 = 650;
+    const cost_100to200 = 850;
+    const cost_200to350 = 1100;
+    const cost_350toMore = 1300;
+
+    // OUTPUT
+    var tinhTienDien = '';
+    var ketQua = '';
+
+    // PROGRESS
+    tinhTienDien = nhapSoKw * cost_0to50;
+    ketQua = 'Họ Tên: ' + nhapHoTen + '<br>';
+
+    // HIỂN THỊ KẾT QUẢ
+    if (nhapSoKw <= 50) {
+        tinhTienDien = nhapSoKw * cost_0to50;
+    }
+    else if (nhapSoKw > 50 && nhapSoKw <= 100) {
+        tinhTienDien = (50 * cost_0to50) + (nhapSoKw - 50) * cost_50to100;
+    }
+    else if (nhapSoKw > 100 && nhapSoKw <= 200) {
+        tinhTienDien = (50 * cost_0to50) + 50 * cost_50to100 + (nhapSoKw - 100) * cost_100to200;
+    }
+    else if (nhapSoKw > 200 && nhapSoKw <= 350) {
+        tinhTienDien = (50 * cost_0to50) + 50 * cost_50to100 + 100 * cost_100to200 + (nhapSoKw - 200) * cost_200to350;
+    }
+    else if (nhapSoKw > 350) {
+        tinhTienDien = (50 * cost_0to50) + 50 * cost_50to100 + 100 * cost_100to200 + 150 * cost_200to350 + (nhapSoKw - 350) * cost_350toMore;
+    }
+
+    ketQua += 'Tiền điện: ' + formatMoney(tinhTienDien) + ' VND';
+    getEle('tinhTienDien').innerHTML = ketQua;
+};
+
+// <!-- ===================================================-->
+// <!-- BÀI TẬP 3: TÍNH THUẾ THU NHẬP CÁ NHÂN -->
+getEle('btnTinhTienThue').onclick = function () {
+    //INPUT
+    var nhapHoVaTen = getEle("nhapHoVaTen").value;
+    var tongThuNhap = getEle("tongThuNhap").value;
+    var soNguoiPhuThuoc = getEle("soNguoiPhuThuoc").value;
+
+    // OUTPUT
+    var thuNhapChiuThue = '';
+    var thueSuat = '';
+    var tienThue = '';
+
+    var ketQua = '';
+
+    //PROGRESS
+    var thuNhapChiuThue = tongThuNhap - 4e+6 - soNguoiPhuThuoc * 1.6e+6;
+
+    if (thuNhapChiuThue <= 60e+6) {
+        thueSuat = 5;
+    }
+    else if (60e+6 < thuNhapChiuThue && thuNhapChiuThue <= 120e+6) {
+        thueSuat = 10;
+    }
+    else if (120e+6 < thuNhapChiuThue && thuNhapChiuThue <= 210e+6) {
+        thueSuat = 15;
+    }
+    else if (210e+6 < thuNhapChiuThue && thuNhapChiuThue <= 384e+6) {
+        thueSuat = 20;
+    }
+    else if (384e+6 < thuNhapChiuThue && thuNhapChiuThue <= 624e+6) {
+        thueSuat = 25;
+    }
+    else if (624e+6 < thuNhapChiuThue && thuNhapChiuThue <= 96e+6) {
+        thueSuat = 30;
+    }
+    else if (thuNhapChiuThue > 96e+6) {
+        thueSuat = 35;
+    }
+
+    // Tính số tiền thuế
+    var tienThue = thuNhapChiuThue * (thueSuat / 100);
+
+    // Format VND
+    var currentformat = new Intl.NumberFormat('vn-VN');
+
+    // HIỂN THỊ KẾT QUẢ
+    ketQua = "Họ tên: " + nhapHoVaTen + "<br>";
+    ketQua += "Tiền thuế thu nhập cá nhân: " + currentformat.format(tienThue) + ' VND';
+
+    getEle("tinhTienThue").innerHTML = ketQua;
+}
+
+// <!-- ===================================================-->
+// <!-- BÀI TẬP 4: TÍNH TIỀN CÁP -->
+function updateSoKetNoi() {
+    var LoaiKhachHangInput = getEle('chonLoaiKhachHang');
+    var soKetNoiInput = getEle('soKetNoi');
+
+    if (LoaiKhachHangInput.value === 'doanhNghiep') {
+        soKetNoiInput.style.display = 'block';
+    } else {
+        soKetNoiInput.style.display = 'none';
+        soKetNoiInput.value = '';
     }
 };
 
-// ------------------------------------------
-// CHƯƠNG TRÌNH 
-var num = 3;
-switch (num) {
-    case 1:
-        console.log('day la so 1');
-        break;
+getEle('btnTinhTienCap').onclick = function () {
+    // INPUT
+    var chonLoaiKhachHang = getEle('chonLoaiKhachHang').value;
+    var nhapMaKhachHang = getEle('nhapMaKhachHang').value;
+    var soKenhCaoCap = getEle('soKenhCaoCap').value;
+    var soKetNoi = getEle('soKetNoi').value;
 
-    case 2:
-        console.log('day la so 2');
-        break;
+    // OUTPUT
+    var phiXuLyHoaDon = '';
+    var phiDichVuCoBan = '';
+    var phiThueKenhCaoCap = '';
+    var tongTien = '';
 
+    var ketQua = '';
 
-    default:
-        console.log('khong la so nao');
-        break;
-}
+    // PROGRESS
+    if (chonLoaiKhachHang === 'nhaDan') {
+        phiXuLyHoaDon = 4.5;
+        phiDichVuCoBan = 20.5;
+        phiThueKenhCaoCap = 7.5 * soKenhCaoCap;
+    }
+    else if (chonLoaiKhachHang === 'doanhNghiep' && soKetNoi <= 10) {
+        phiXuLyHoaDon = 15;
+        phiDichVuCoBan = 75;
+        phiThueKenhCaoCap = 50 * soKenhCaoCap;
+    }
+    else if (chonLoaiKhachHang === 'doanhNghiep') {
+        phiXuLyHoaDon = 15;
+        phiDichVuCoBan = 75 + 5 * (soKetNoi - 10);
+        phiThueKenhCaoCap = 50 * soKenhCaoCap;
+    }
 
-// ------------------------------------------
-// CHƯƠNG TRÌNH 
-var textT = 'ba';
-switch (textT) {
-    case 'ba':
-        console.log('day la ba');
-        break;
+    // Tính tổng tiền
+    tongTien = phiXuLyHoaDon + phiDichVuCoBan + phiThueKenhCaoCap;
 
-    case 'me':
-        console.log('day la me');
-        break;
+    // HIỂN THỊ KẾT QUẢ
+    ketQua = 'Mã khách hàng: ' + nhapMaKhachHang +'<br>';
+    ketQua += 'Tiền cáp: $' + tongTien;
 
-
-    default:
-        console.log('khong');
-        break;
-}
-
-// ------------------------------------------
-// DAY15
-function btnxuatThongTin() {
-    var num_1 = 5;
-    var num_2 = 10;
-
-    var total = num_1 + num_2;
-    console.log('btnxuatThongTin: ', total);
+    getEle('tinhTienCap').innerHTML = ketQua;
 };
 
-btnxuatThongTin();
-
-
-// ------------------------------------------
-function tinhTong(a, b) {
-    var num_1 = a;
-    var num_2 = b;
-
-    var total = num_1 + num_2;
-    console.log('tinh tong: ', total);
-};
-
-tinhTong(100, 5);
-tinhTong(50, 5);
-
-// ------------------------------------------
-function tinhLuong(luongNgay, soNgayLam) {
-    var luong = luongNgay * soNgayLam;
-
-    return luong;
-    console.log('luong: ',luong);
-};
-
-var tongLuongCuLi = tinhLuong(10000,5);
-console.log('tongLuongCuLi', tongLuongCuLi);
-
-var tongLuongGiamDoc = tinhLuong(50000,5);
-console.log('tongLuongGiamDoc', tongLuongGiamDoc);

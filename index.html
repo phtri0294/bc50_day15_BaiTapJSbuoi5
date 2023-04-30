@@ -2,57 +2,278 @@
 <html lang="en">
 
 <head>
-    <title>JavaScript</title>
+    <title>JavaScript So Sánh</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- BOOTSTRAP 4.3.1 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
 </head>
 
 <body>
-    <div class="container">
-        <!-- DEMO 1 -->
-        <div class="d-flex justify-content-center">
-            <div class="card">
-                <div class="card-header bg-info text-center">
-                    <h3>CHƯƠNG TRÌNH XẾP HẠNG</h3>
-                </div>
+    <div class="container mt-5 ">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2 bg-light">
+                <!-- Nav pills -->
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#bai1">
+                            <i class="fa fa-book text-warning"></i>
+                            Bài 1
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#bai2">
+                            <i class="fa fa-book text-warning"></i>
+                            Bài 2
+                        </a>
 
-                <div class="card-body">
-                    <!-- INPUT 1 -->
-                    <div class="form-group text-center">
-                        <h4>Điểm toán</h4>
-                        <input id="diemToan" class="form-control text-center" type="number" />
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#bai3">
+                            <i class="fa fa-book text-warning"></i>
+                            Bài 3
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#bai4">
+                            <i class="fa fa-book text-warning"></i>
+                            Bài 4
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-12 col-md-10 col-lg-10">
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <!-- ========================================================================= -->
+                    <!-- BÀI TẬP 1: QUẢN LÝ TUYỂN SINH -->
+                    <div class="tab-pane container active" id="bai1">
+                        <div class="card">
+                            <div class="card-header" style="font-size: 30px;">
+                                <i class="fa fa-school text-warning"></i>
+                                <span class="font-weight-bold">Quản lý tuyển sinh</span>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <!-- INPUT 1 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="diemChuan" class="form-control" type="number"
+                                            placeholder="Điểm chuẩn" />
+                                    </div>
+
+                                    <!-- INPUT 2 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <select id="chonKhuVuc" class="form-control" type="text">
+                                            <option>Chọn khu vực</option>
+                                            <option value="2">A</option>
+                                            <option value="1">B</option>
+                                            <option value="0.5">C</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- INPUT 3 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <select id="chonDoiTuong" class="form-control" type="text">
+                                            <option>Chọn đối tượng</option>
+                                            <option value="2.5">1</option>
+                                            <option value="1.5">2</option>
+                                            <option value="1">3</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <!-- INPUT 4 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="diemMonThu1" class="form-control" type="number"
+                                            placeholder="Điểm môn thứ 1" />
+                                    </div>
+
+                                    <!-- INPUT 5 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="diemMonThu2" class="form-control" type="number"
+                                            placeholder="Điểm môn thứ 2" />
+                                    </div>
+
+                                    <!-- INPUT 6 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="diemMonThu3" class="form-control" type="number"
+                                            placeholder="Điểm môn thứ 3" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button id="btnKetQuaDiem" class="btn btn-primary mt-3" style="font-size: 25px;">KẾT
+                                    QUẢ
+                                    ĐIỂM</button>
+
+                                <div id="ketQuaDiem" class="alert alert-success mt-3" style="font-size: 25px;">
+                                    <i class="fa fa-hand-point-right text-warning"></i>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
 
-                    <!-- INPUT 2 -->
-                    <div class="form-group text-center">
-                        <h4>Điểm lý</h4>
-                        <input id="diemLy" class="form-control" type="number" />
+                    <!-- ========================================================================= -->
+                    <!-- BÀI TẬP 2: TÍNH TIỀN ĐIỆN -->
+                    <div class="tab-pane container fade" id="bai2">
+                        <div class="card">
+                            <div class="card-header" style="font-size: 30px;">
+                                <i class="fa fa-car-battery text-success"></i>
+                                <span class="font-weight-bold">Tính tiền điện</span>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <!-- INPUT 1 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="nhapHoTen" class="form-control" type="text"
+                                            placeholder="Nhập Họ Tên" />
+                                    </div>
+
+                                    <!-- INPUT 2 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="nhapSoKw" class="form-control" type="number"
+                                            placeholder="Nhập số KW" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button id="btnTinhTienDien" class="btn btn-primary mt-3" style="font-size: 25px;">TÍNH
+                                    TIỀN
+                                    ĐIỆN</button>
+
+                                <div id="tinhTienDien" class="alert alert-success mt-3" style="font-size: 25px;">
+                                    <i class="fa fa-hand-point-right text-warning"></i>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
-                    <!-- INPUT 3 -->
-                    <div class="form-group text-center">
-                        <h4>Điểm hóa</h4>
-                        <input id="diemHoa" class="form-control" type="number" />
+                    <!-- ========================================================================= -->
+                    <!-- BÀI TẬP 3: TÍNH THUẾ THU NHẬP CÁ NHÂN -->
+                    <div class="tab-pane container fade" id="bai3">
+                        <div class="card">
+                            <div class="card-header" style="font-size: 30px;">
+                                <i class="fa fa-donate text-warning"></i>
+                                <span class="font-weight-bold">Tính thuế thu nhập cá nhân</span>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <!-- INPUT 1 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="nhapHoVaTen" class="form-control" type="text"
+                                            placeholder="Nhập Họ và Tên" />
+                                    </div>
+
+                                    <!-- INPUT 2 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="tongThuNhap" class="form-control" type="number"
+                                            placeholder="Tổng thu nhập" />
+                                    </div>
+
+                                    <!-- INPUT 3 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="soNguoiPhuThuoc" class="form-control" type="number"
+                                            placeholder="Số người phụ thuộc" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button id="btnTinhTienThue" class="btn btn-primary mt-3" style="font-size: 25px;">TÍNH
+                                    TIỀN
+                                    THUẾ</button>
+
+                                <div id="tinhTienThue" class="alert alert-success mt-3" style="font-size: 25px;">
+                                    <i class="fa fa-hand-point-right text-warning"></i>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
-                </div>
+                    <!-- ========================================================================= -->
+                    <!-- BÀI TẬP 4: TÍNH TIỀN CÁP -->
+                    <div class="tab-pane container fade" id="bai4">
+                        <div class="card">
+                            <div class="card-header bg-w" style="font-size: 30px;">
+                                <i class="fa fa-spinner text-primary"></i>
+                                <span class="font-weight-bold">Tính thuế thu nhập cá nhân</span>
+                            </div>
 
-                <div class="card-footer text-center">
-                    <button id="btnXepHang" class="btn btn-success" style="font-size: 25px;">XẾP HẠNG</button>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <!-- INPUT 1 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <select id="chonLoaiKhachHang" class="form-control" type="text" onchange="updateSoKetNoi()">
+                                            <option>Chọn loại khách hàng</option>
+                                            <option value="nhaDan">Nhà dân</option>
+                                            <option value="doanhNghiep">Doanh nghiệp</option>
+                                        </select>
+                                    </div>
 
-                    <div id="xepHang" class="alert alert-primary mt-3 text-center" style="font-size: 25px;">
-                        <p>GIỎI</p>
+                                    <!-- INPUT 2 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="nhapMaKhachHang" class="form-control" type="number"
+                                            placeholder="Nhập Mã Khách Hàng" />
+                                    </div>
+
+                                    <!-- INPUT 3 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit">
+                                        <input id="soKenhCaoCap" class="form-control" type="number"
+                                            placeholder="Số kênh cao cấp" />
+                                    </div>
+
+                                    <!-- INPUT 4 -->
+                                    <div class="col-md-12 col-lg-4 responsive__edit mt-3">
+                                        <input id="soKetNoi" class="form-control" type="number"
+                                            placeholder="Số kết nối" style="display: none;"/>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button id="btnTinhTienCap" class="btn btn-primary mt-3" style="font-size: 25px;">TÍNH
+                                    TIỀN
+                                    CÁP</button>
+
+                                <div id="tinhTienCap" class="alert alert-success mt-3" style="font-size: 25px;">
+                                    <i class="fa fa-hand-point-right text-warning"></i>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
-        <!-- ------------------------------------- -->
     </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
